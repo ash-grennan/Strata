@@ -196,7 +196,8 @@ bool WeightTable::load(const std::string& pack_dir, void* arena_base, uint64_t a
 
     if (pool == 0 || rows.empty()) { err = "index.txt has no header or no rows"; return false; }
     for (const auto& r : rows) {
-        if (r.ne0 <= 0 || r.ne1 <= 0) { err = "index.txt: bad shape for " + r.name; return false; }
+        // ne1 == 0 is a 1-D tensor (norms, biases): tools/iq_pack.py and pack_index.py write it that way
+        if (r.ne0 <= 0 || r.ne1 < 0) { err = "index.txt: bad shape for " + r.name; return false; }
         if (r.ne1 > 0 && r.ne0 > (std::numeric_limits<int64_t>::max)() / r.ne1) {
             err = "index.txt: shape overflows for " + r.name;
             return false;
