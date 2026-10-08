@@ -21,6 +21,10 @@ and their limits. Report what you actually measured and label estimates separate
 - [2026-10-04: 2x Intel Arc Pro B60 24 GB, Ryzen 5 5600, 64 GB RAM](../bench/results/2026-10-04-community-2x-arc-pro-b60/README.md):
   the SYCL port at `6f32ec0` with two fixes, Coder IQ1_M and Flash-Next IQ2_XS, 8,192-token context, layer split across both cards;
   short prompts and 2K-token prompts, plus one run on a single B60. Intel's SYCL engine, no 4,096/32,768/128,000-token sweep.
+- [2026-10-07: RX 7900 XTX 24 GB, Ryzen 5 7600X, 64 GB RAM, Linux](../bench/results/2026-10-07-rx-7900-xtx-linux-tuning/README.md):
+  engines 0.1.40 and 0.1.40.2 (HIP, source build), original Flash-Next IQ3_S, 131,072-token context; A/B sweeps of
+  `--kv-resident`, `--prefill auto:N`, `--pcie-frac`, `--host-core`, `--lookup-chain`, `--pool-workers`, `--spec-min-p`
+  and the GPU power profile against setup's configuration, plus images through the CPU encoder.
 
 ## What to record
 
